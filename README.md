@@ -5,7 +5,7 @@ This repo contains the following actions workflow.
     2. A number of days for considering if a repo is stale.
     3. A minimum repo size in megabytes. Only repos larger than this size will be considered.
 
-    This workflow will put the repos if considers “stale” into archive mode, locking the repo from further changes. The workflow will also create a csv file for each org with the following fields:
+    The workflow will create a csv file for each org with the following fields:
     1. Repo name
     2. Number of days since last activity
     3. Repo size
