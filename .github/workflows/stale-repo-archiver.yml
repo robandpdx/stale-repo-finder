@@ -1,0 +1,46 @@
+name: 'Find stale repos'
+on:
+  workflow_dispatch:
+    inputs:
+      orgs:
+        description: 'List of orgs to check for stale repos, comma separated'
+        required: true
+        type: string
+      staleDays:
+        description: 'Number of days without pushes to consider a repo stale'
+        required: true
+        default: '30' 
+        type: "number"
+      minSize:
+        description: 'Minimum size (mb) of repo to consider'
+        required: true
+        default: '1000'
+        type: "number"
+
+permissions: read-all
+
+jobs:
+  prepare:
+    name: Find stale repos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out scripts
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          check-latest: true
+      - run: |
+          cd .github/scripts
+          npm install
+
+      - name: Print the input name to STDOUT
+        run: echo Finding stale repos in ${{ github.event.inputs.orgs }}
+      - name: Find stale repos
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const options = { orgs: '${{ github.event.inputs.orgs }}', staleDays: '${{ github.event.inputs.staleDays }}', minSize: '${{ github.event.inputs.minSize }}', token: '${{ secrets.TOKEN }}' };
+            await require('./.github/scripts/find-stale-repos.js')({github, context, options})
