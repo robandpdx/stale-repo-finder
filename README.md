@@ -1,7 +1,7 @@
 # stale-repo-finder
 This repo contains the following actions workflow.
 1. A workflow that will identify “stale” repos in an org or list of orgs. This workflow will take as input
-    1. A list of orgs.
+    1. A list of orgs, comma separated.
     2. A number of days for considering if a repo is stale.
     3. A minimum repo size in megabytes. Only repos larger than this size will be considered.
 
