@@ -8,7 +8,7 @@
         "test": "nyc --reporter=lcov --reporter=cobertura --reporter=text --reporter=text-summary uvu"
     },
     "dependencies": {
-        "@octokit/rest": "^18.12.0"
+        "@octokit/rest": "^21.1.0"
     },
     "repository": "robandpdx-fabrikam:stale-repo-archiver",
     "keywords": [],
